@@ -1,6 +1,6 @@
 AFRAME.registerComponent('screen', {
   schema: {
-    color: {default: 'blue'},
+    color: {default: 'red'},
     size: {type: 'int', default: 5}
   },
   init: function () {},
