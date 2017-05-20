@@ -1,2 +1,2 @@
 # CodeDay2017
-it's a me
+https://scollet1.github.io/CodeDay2017/
