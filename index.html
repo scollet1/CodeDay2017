@@ -18,75 +18,68 @@
 </head>
 
 <body>
-  <a-scene>
-    <a-assets>
-        <a-mixin id="dancer" 
-                 geometry="primitive: box; radius: 0.2"
-                 material="color: black"
-                 scale-y-color="from: 10 60 10; to: 180 255 180; maxScale: 15">
-        </a-mixin>
+  	<a-scene>
+    		<a-assets>
+        		<a-mixin id="dancer" 
+                 		geometry="primitive: box; radius: 0.2"
+                 		material="color: black"
+                 		scale-y-color="from: 10 60 10; to: 180 255 180; maxScale: 15">
+        		</a-mixin>
 
-        <a-mixin id="random-1" 
-                 random-spherical-position="radius: 10">
-        </a-mixin>
+        		<a-mixin id="random-1" 
+                 		random-spherical-position="radius: 10">
+        		</a-mixin>
       
-        <audio id="song" 
-               autoplay 
-               loop 
-               src="soundcloud/KPJ3.wav">
-        </audio>
-    </a-assets>
+        		<audio 	id="song" 
+               			autoplay 
+               			loop 
+               			src="soundcloud/KPJ3.wav">
+        		</audio>
+    		</a-assets>
     
-      <a-light type="ambient" 
-               color="#222">
-      </a-light>
+      		<a-light type="ambient" 
+               		 color="#222">
+      		</a-light>
       
-      <a-entity id="analyser"
-                audio-analyser="src: #song"
-                audioanalyser-waveform="radius: 0.5"
-                rotation="90 0 0"
-                position="0 30 0">
-     </a-entity>
+      		<a-entity id="analyser"
+                	  audio-analyser="src: #song"
+                	  audioanalyser-waveform="radius: 0.5"
+                	  rotation="90 0 0"
+                	  position="0 0 0">
+     		</a-entity>
 	  
-      <a-light
-        audioanalyser-volume-bind="analyserEl: #analyser; component: light; property: intensity; max: 2.2; multiplier: .018"
-        type="point"
-        position="1 2 1">
-      </a-light>
-      
-      <a-light type="point" 
-               position="-2 2 1">
-      </a-light>
-     
-      <a-sky color="#111"></a-sky>
+      		<a-light audioanalyser-volume-bind="analyserEl: #analyser; component: light; property: intensity; max: 2.2; multiplier: .018"
+        		 type="point"
+        		 position="1 2 1">
+      		</a-light>
     
-      
-    
-      <a-entity id="origin" 
-                geometry="primitive: sphere" 
-                visible="true" 
-                scale="0.5 0.5 0.5">
-      </a-entity>
+      		<a-entity id="origin" 
+                	  geometry="primitive: sphere" 
+                	  visible="true" 
+                	  scale="0.5 0.5 0.5">
+      		</a-entity>
 
-      <a-entity id="box"
-        geometry="primitive: box" material="color: #C03546"
-        color-on-beat="analyserEl: #analyser"
-        ring-on-beat="analyserEl: #analyser"
-        position="0 0.5 -4">
-      </a-entity>
+	      	<a-entity id="box"
+			  geometry="primitive: box" material="color: #C03546"
+			  color-on-beat="analyserEl: #analyser"
+			  ring-on-beat="analyserEl: #analyser"
+			  position="0 0.5 -4">
+	      	</a-entity>
 	  
-      <a-entity audioanalyser-levels-scale="analyserEl: #analyser; max: 50; multiplier: 0.06"
-                entity-generator="mixin: random-1 red dancer; num: 350" 
-		color-on-beat="analyserEl: #analyser"
-        	ring-on-beat="analyserEl: #analyser"
-                layout="type: circle; radius: 10"
-                rotation="0 180 0">
-      </a-entity>
-      <a-light type="point" intensity="0.5"></a-light>
+	     	<a-entity audioanalyser-levels-scale="analyserEl: #analyser; max: 50; multiplier: 0.06"
+			  entity-generator="mixin: random-1 red dancer; num: 350" 
+			  color-on-beat="analyserEl: #analyser"
+			  ring-on-beat="analyserEl: #analyser"
+			  layout="type: circle; radius: 10"
+			  rotation="0 180 0">
+	      	</a-entity>
+      
+		<a-light type="point" intensity="0.5"></a-light>
 
-      <a-sky color="#000"></a-sky>
-      <a-entity camera look-controls position="0 1.8 0"></a-entity>
-  </a-scene>
+     		<a-sky color="#000"></a-sky>
+      		
+		<a-entity camera look-controls position="0 1.8 0"></a-entity>
+  	</a-scene>
 </body>
 
 
