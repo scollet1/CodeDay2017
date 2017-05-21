@@ -4,6 +4,7 @@
     <title>Levels</title>
     <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
     <script src="js/build.js"></script>
+    
     <script src="js/audioanalyser-levels-scale.js"></script>
     <script src="js/scale-y-color.js"></script>
   </head>
@@ -15,9 +16,8 @@
                  	material="color: #C03546"
                  	scale-y-color="from: 10 60 10; to: 180 255 180; maxScale: 15">
         	</a-mixin>
-        	<a-mixin id="random-1" 
-                 	random-spherical-position="radius: 10">
-        	</a-mixin>
+        	<a-mixin id="random-1"
+                 random-spherical-position="lengthX: 180; lengthY: 180; radius: 10"></a-mixin>
         <audio id="song" autoplay loop src="soundcloud/KPJ3.wav"></audio>
       </a-assets>
 
