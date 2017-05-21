@@ -21,6 +21,7 @@
         <audio id="song" autoplay loop src="soundcloud/KPJ3.wav"></audio>
       </a-assets>
       		<a-entity
+			  camera look-controls
         audioanalyser="src: #song; smoothingTimeConstant: 5; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 360"
