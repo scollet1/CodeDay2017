@@ -53,12 +53,12 @@
      
       <a-sky color="#111"></a-sky>
     
-      <!--<a-entity id="analyser"
+      <a-entity id="analyser"
                 audioanalyser="src: #song"
                 audioanalyser-waveform="radius: 0.5"
                 rotation="90 0 0"
                 position="0 30 0"
-      ></a-entity> -->
+      ></a-entity>
     
       <a-entity id="origin" 
                 geometry="primitive: sphere" 
@@ -72,6 +72,14 @@
                 layout="type: circle; radius: 10"
                 rotation="0 180 0">
       </a-entity>
+	  
+	  <a-entity
+        audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+        audioanalyser-levels-scale="max: 50; multiplier: 0.06"
+        entity-generator="mixin: bar; num: 256"
+        layout="type: circle; radius: 10"
+        rotation="0 180 0"
+      ></a-entity>
       <a-light type="point" intensity="0.5"></a-light>
 
       <a-sky color="#000"></a-sky>
