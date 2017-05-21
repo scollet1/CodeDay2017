@@ -69,7 +69,9 @@
       <a-entity audioanalyser-levels-scale="analyserEl: #analyser; max: 50; multiplier: 0.06"
                 entity-generator="mixin: random-1 red dancer; num: 350" 
                 layout="type: circle; radius: 10"
-                rotation="0 180 0">
+                rotation="0 180 0"
+		>
+	      <a-animation attribute="position" from="1 1 1" to="2 4 -8" direction="alternate"></a-animation>
       </a-entity>
       <a-light type="point" intensity="0.5"></a-light>
 
