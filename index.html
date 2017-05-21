@@ -9,7 +9,7 @@
   </head>
   <body>
     <a-scene antialias="true">
-	<a-camera wasd-controls-enabled="false" camera look-controls></a-camera> <!-- Setting user controls -->
+	<a-camera wasd-controls-enabled="false"></a-camera> <!-- Setting user controls -->
       <a-assets>
 	      	<a-mixin id="dancer" geometry="primitive: cylinder; radius: 0.2" material="color: #C03546"
 		         scale-y-color="from: 10 10 50; to: 210, 220, 250; maxScale: 15" 
@@ -20,17 +20,16 @@
 	      	</a-mixin>
         <audio id="song" autoplay loop src="soundcloud/KPJ3.wav"></audio>
       </a-assets>
-
-      <a-entity
+	<a-entity camera look-controls>
+      		<a-entity
         audioanalyser="src: #song; smoothingTimeConstant: 0.9; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 360"
 	layout="type: circle; radius: 10"
 	entity-generator="mixin: red dancer; num: 256"
         rotation="0 90 0">
-	
+		</a-entity>
 	</a-entity>
-
       <a-light type="ambient" color="#222"></a-light>
       <a-light type="point" position="0 1 0" intensity="2"></a-light>
       <a-sky color="#222"></a-sky>
