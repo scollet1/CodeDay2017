@@ -1,4 +1,8 @@
 
+require('aframe-entity-generator-component');
+require('aframe-layout-component');
+require('aframe-template-component');
+
 /* Randomizer Components */
 
 !function(t){function a(n){if(e[n])return e[n].exports;var r=e[n]={exports:{},id:n,loaded:!1};return t[n].call(r.exports,r,r.exports,a),r.loaded=!0,r.exports}var e={};return a.m=t,a.c=e,a.p="",a(0)}([function(t,a){if("undefined"==typeof AFRAME)throw new Error("Component attempted to register before AFRAME was available.");AFRAME.registerComponent("random-color",{schema:{min:{"default":{x:0,y:0,z:0},type:"vec3"},max:{"default":{x:1,y:1,z:1},type:"vec3"}},update:function(){var t=this.data,a=t.max,e=t.min;this.el.setAttribute("material","color","#"+new THREE.Color(Math.random()*a.x+e.x,Math.random()*a.y+e.y,Math.random()*a.z+e.z).getHexString())}}),AFRAME.registerComponent("random-position",{schema:{min:{"default":{x:-10,y:-10,z:-10},type:"vec3"},max:{"default":{x:10,y:10,z:10},type:"vec3"}},update:function(){var t=this.data,a=t.max,e=t.min;this.el.setAttribute("position",{x:Math.random()*(a.x-e.x)+e.x,y:Math.random()*(a.y-e.y)+e.y,z:Math.random()*(a.z-e.z)+e.z})}}),AFRAME.registerComponent("random-spherical-position",{schema:{radius:{"default":10},startX:{"default":0},lengthX:{"default":360},startY:{"default":0},lengthY:{"default":360}},update:function(){var t=this.data,a=THREE.Math.degToRad(Math.random()*t.lengthX+t.startX),e=THREE.Math.degToRad(Math.random()*t.lengthY+t.startY);this.el.setAttribute("position",{x:t.radius*Math.cos(a)*Math.sin(e),y:t.radius*Math.sin(a)*Math.sin(e),z:t.radius*Math.cos(e)})}}),AFRAME.registerComponent("random-rotation",{schema:{min:{"default":{x:0,y:0,z:0},type:"vec3"},max:{"default":{x:360,y:360,z:360},type:"vec3"}},update:function(){var t=this.data,a=t.max,e=t.min;this.el.setAttribute("rotation",{x:Math.random()*a.x+e.x,y:Math.random()*a.y+e.y,z:Math.random()*a.z+e.z})}}),AFRAME.registerComponent("random-scale",{schema:{min:{"default":{x:0,y:0,z:0},type:"vec3"},max:{"default":{x:2,y:2,z:2},type:"vec3"}},update:function(){var t=this.data,a=t.max,e=t.min;this.el.setAttribute("scale",{x:Math.random()*a.x+e.x,y:Math.random()*a.y+e.y,z:Math.random()*a.z+e.z})}})}]);
@@ -22,7 +26,25 @@ i=a(),o=a(-1),u=a(1);switch(t.name){case"translateX":return i.x;case"translateY"
 
 !function(a,b){"use strict";"function"==typeof define&&define.amd?define([],function(){return a.annyang=b(a)}):"object"==typeof module&&module.exports?module.exports=b(a):a.annyang=b(a)}("undefined"!=typeof window?window:this,function(a,b){"use strict";var c,d=a.SpeechRecognition||a.webkitSpeechRecognition||a.mozSpeechRecognition||a.msSpeechRecognition||a.oSpeechRecognition;if(!d)return null;var e,f,g=[],h={start:[],error:[],end:[],result:[],resultMatch:[],resultNoMatch:[],errorNetwork:[],errorPermissionBlocked:[],errorPermissionDenied:[]},i=0,j=0,k=!1,l="font-weight: bold; color: #00f;",m=!1,n=!1,o=/\s*\((.*?)\)\s*/g,p=/(\(\?:[^)]+\))\?/g,q=/(\(\?)?:\w+/g,r=/\*\w+/g,s=/[\-{}\[\]+?.,\\\^$|#]/g,t=function(a){return a=a.replace(s,"\\$&").replace(o,"(?:$1)?").replace(q,function(a,b){return b?a:"([^\\s]+)"}).replace(r,"(.*?)").replace(p,"\\s*$1?\\s*"),new RegExp("^"+a+"$","i")},u=function(a){var b=Array.prototype.slice.call(arguments,1);a.forEach(function(a){a.callback.apply(a.context,b)})},v=function(){return e!==b},w=function(a,b){a.indexOf("%c")!==-1||b?(b=b||l,console.log(a,b)):console.log(a)},x=function(){v()||c.init({},!1)},y=function(a,b,c){g.push({command:a,callback:b,originalPhrase:c}),k&&w("Command successfully loaded: %c"+c,l)},z=function(a){u(h.result,a);for(var b,c=0;c<a.length;c++){b=a[c].trim(),k&&w("Speech recognized: %c"+b,l);for(var d=0,e=g.length;d<e;d++){var f=g[d],i=f.command.exec(b);if(i){var j=i.slice(1);return k&&(w("command matched: %c"+f.originalPhrase,l),j.length&&w("with parameters",j)),f.callback.apply(this,j),void u(h.resultMatch,b,f.originalPhrase,a)}}}u(h.resultNoMatch,a)};return c={init:function(l,o){o=o===b||!!o,e&&e.abort&&e.abort(),e=new d,e.maxAlternatives=5,e.continuous="http:"===a.location.protocol,e.lang="en-US",e.onstart=function(){n=!0,u(h.start)},e.onerror=function(a){switch(u(h.error,a),a.error){case"network":u(h.errorNetwork,a);break;case"not-allowed":case"service-not-allowed":f=!1,(new Date).getTime()-i<200?u(h.errorPermissionBlocked,a):u(h.errorPermissionDenied,a)}},e.onend=function(){if(n=!1,u(h.end),f){var a=(new Date).getTime()-i;j+=1,j%10===0&&k&&w("Speech Recognition is repeatedly stopping and starting. See http://is.gd/annyang_restarts for tips."),a<1e3?setTimeout(function(){c.start({paused:m})},1e3-a):c.start({paused:m})}},e.onresult=function(a){if(m)return k&&w("Speech heard, but annyang is paused"),!1;for(var b=a.results[a.resultIndex],c=[],d=0;d<b.length;d++)c[d]=b[d].transcript;z(c)},o&&(g=[]),l.length&&this.addCommands(l)},start:function(a){x(),a=a||{},m=a.paused!==b&&!!a.paused,f=a.autoRestart===b||!!a.autoRestart,a.continuous!==b&&(e.continuous=!!a.continuous),i=(new Date).getTime();try{e.start()}catch(a){k&&w(a.message)}},abort:function(){f=!1,j=0,v()&&e.abort()},pause:function(){m=!0},resume:function(){c.start()},debug:function(a){k=!(arguments.length>0)||!!a},setLanguage:function(a){x(),e.lang=a},addCommands:function(b){var c;x();for(var d in b)if(b.hasOwnProperty(d))if(c=a[b[d]]||b[d],"function"==typeof c)y(t(d),c,d);else{if(!("object"==typeof c&&c.regexp instanceof RegExp)){k&&w("Can not register command: %c"+d,l);continue}y(new RegExp(c.regexp.source,"i"),c.callback,d)}},removeCommands:function(a){return a===b?void(g=[]):(a=Array.isArray(a)?a:[a],void(g=g.filter(function(b){for(var c=0;c<a.length;c++)if(a[c]===b.originalPhrase)return!1;return!0})))},addCallback:function(c,d,e){if(h[c]!==b){var f=a[d]||d;"function"==typeof f&&h[c].push({callback:f,context:e||this})}},removeCallback:function(a,c){var d=function(a){return a.callback!==c};for(var e in h)h.hasOwnProperty(e)&&(a!==b&&a!==e||(c===b?h[e]=[]:h[e]=h[e].filter(d)))},isListening:function(){return n&&!m},getSpeechRecognizer:function(){return e},trigger:function(a){return c.isListening()?(Array.isArray(a)||(a=[a]),void z(a)):void(k&&w(n?"Speech heard, but annyang is paused":"Cannot trigger while annyang is aborted"))}}});
 
+
 /* Continued */
+
+AFRAME.registerComponent('color-on-beat', {
+  schema: {
+    analyserEl: {type: 'selector'}
+  },
+
+  init: function () {
+    var analyserEl = this.data.analyserEl || this.el;
+    var el = this.el;
+
+    analyserEl.addEventListener('audioanalyser-beat', function () {
+      el.setAttribute('material', 'color', '#' + new THREE.Color(
+        Math.random(), Math.random(), Math.random()
+      ).getHexString());
+    });
+  }
+});
 
 /**
  * Scale children based on audio frequency levels.
