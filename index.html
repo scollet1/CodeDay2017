@@ -9,11 +9,7 @@
   <title>My A-Frame Scene</title>
   
   <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
-  <script src="../lib/annyang.min.js"></script>
-  <script src="../lib/spotify-web-api.js"></script>
-  <script src="../components/color-on-beat.js"></script>
-  <script src="../components/.js"></script>
-  <script src="../components/ring-on-beat.js"></script>
+  <script src="https://unpkg.com/aframe-audioanalyser-component@^3.0.0/dist/aframe-audioanalyser-component.min.js"></script>
   <script src="js/libs.js"></script>
 </head>
 
@@ -42,7 +38,7 @@
       </a-light>
       
       <a-entity id="analyser"
-                audioanalyser="src: #song"
+                audio-analyser="src: #song"
                 audioanalyser-waveform="radius: 0.5"
                 rotation="90 0 0"
                 position="0 30 0">
