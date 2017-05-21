@@ -1,3 +1,9 @@
+<!-- 
+  Comment all the shit
+-->
+
+
+
 <head>
  
   <title>My A-Frame Scene</title>
@@ -14,44 +20,130 @@
 <body>
   <a-scene>
     <a-assets>
-        <a-mixin id="box" 
+        <a-mixin id="dancer" 
                  geometry="primitive: box; radius: 0.2"
-                 material="color: #FF4B68" 
+                 material="color: black"
                  scale-y-color="from: 10 60 10; to: 180 255 180; maxScale: 15">
         </a-mixin>
 
         <a-mixin id="random-1" 
                  random-spherical-position="radius: 10">
-      </a-mixin>
-
-      <!--  <a-mixin id="red" material="color: #FF4B68"></a-mixin>-->
+        </a-mixin>
       
-        <audio id="song" autoplay loop src="https://www.youtube.com/watch?v=ZIpzzbXeetE"></audio>
+        <audio id="song" 
+               autoplay 
+               loop 
+               src="https://soundcloud.com/new-retro-wave-pt-2/trevor-something-something">
+        </audio>
     </a-assets>
+    
+      <a-light type="ambient" 
+               color="#222">
+      </a-light>
+      
+      <a-light
+        audioanalyser-volume-bind="analyserEl: #analyser; component: light; property: intensity; max: 2.2; multiplier: .018"
+        type="point"
+        position="1 2 1">
+      </a-light>
+      
+      <a-light type="point" 
+               position="-2 2 1">
+      </a-light>
+     
+      <a-sky color="#111"></a-sky>
+    
+      <!--<a-entity id="analyser"
+                audioanalyser="src: #song"
+                audioanalyser-waveform="radius: 0.5"
+                rotation="90 0 0"
+                position="0 30 0"
+      ></a-entity> -->
     
       <a-entity id="origin" 
                 geometry="primitive: sphere" 
                 visible="true" 
                 scale="0.5 0.5 0.5">
       </a-entity>
-      
-      <a-entity entity-generator="mixin: random-1 red box; num: 350" 
-                rotation="0 180 0" 
-                audioanalyser-levels-scale="max: 50; multiplier: 0.06" 
-                audioanalyser="src: #song; smoothingTimeConstant: 0.9"
-                animation__scale="property: scale; dir: alternate; dur: 200; delay: 2000;
-                                      easing: easeInSine; loop: true; to: 1.2 1 1.2"
-                animation__yoyo="property: position; dir: alternate; dur: 1000;
-                                     easing: easeInSine; loop: true; to: 0 2 0">>
+
+      <a-entity audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+                audioanalyser-levels-scale="max: 50; multiplier: 0.06"
+                entity-generator="mixin: random-1 red dancer; num: 350" 
+                layout="type: circle; radius: 10"
+                rotation="0 180 0">
       </a-entity>
-     <!-- <a-entity entity-generator="mixin: random-2 blue sphere; num: 800">
-        <a-animation attribute="rotation" repeat="indefinite" easing="linear"
-                     dur="128000" to="0 360 0"></a-animation>
-      </a-entity>-->
-      <a-light type="ambient" color="#222"></a-light>
       <a-light type="point" intensity="0.5"></a-light>
 
       <a-sky color="#000"></a-sky>
       <a-entity camera look-controls position="0 1.8 0"></a-entity>
   </a-scene>
 </body>
+
+
+
+<!--
+<html>
+  <head>
+    <title>Levels</title>
+    <meta name="description" content="Surrounded 360 degrees by audio frequency bars"></meta>
+    <meta property="og:image" content="https://raw.githubusercontent.com/ngokevin/kframe/master/components/audioanalyser/examples/levels/preview.gif"></meta>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+  <script src="https://rawgit.com/ngokevin/aframe-randomizer-components/master/dist/aframe-randomizer-components.min.js"></script>
+  <script src="https://rawgit.com/ngokevin/aframe-entity-generator-component/master/dist/aframe-entity-generator-component.min.js"></script>
+  <script src="https://rawgit.com/blairmacintyre/aframe-look-at-billboard-component/master/dist/aframe-look-at-billboard-component.min.js"></script>
+  <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-audioanalyser-component@^3.0.0/dist/aframe-audioanalyser-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene antialias="true">
+      <a-assets>
+        <a-mixin id="bar"
+          geometry="primitive: box"
+          material="color: black"
+          scale-y-color="from: 10 60 10; to: 180 255 180; maxScale: 15"
+        ></a-mixin>
+        <audio id="song" autoplay loop src="https://soundcloud.com/new-retro-wave-pt-2/trevor-something-something"></audio>
+      </a-assets>
+
+      <a-entity
+        audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+        audioanalyser-levels-scale="max: 50; multiplier: 0.06"
+        entity-generator="mixin: bar; num: 256"
+        layout="type: circle; radius: 10"
+        rotation="0 180 0"
+      ></a-entity>
+
+      <a-light type="ambient" color="#222"></a-light>
+      <a-light type="point" position="0 1 0" intensity="2"></a-light>
+      <a-circle color="#333" opacity="0.8" rotation="-90 0 0" radius="12"
+        roughness="1"></a-circle>
+      <a-sky color="#222"></a-sky>
+    </a-scene>
+  </body>
+</html>
+
+-->
+
+
+
+
+<!--
+<html>
+	<head>
+    		<meta name="apple-mobile-web-app-capable"/> <!-- I-frame support
+		    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+        <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script> <!-- Custom animation library
+    		<script src="entities.js"></script> <!-- Our component library
+	</head>
+	<body>
+		<a-scene>
+          <a-entity id="origin" geometry="primitive: sphere" visible="false"></a-entity>
+          <a-entity dancers></a-entity>
+      		<a-entity geometry="primitive: box" material="color: green" position="-.5, 1, -2">
+	        
+		<a-sky color="blue"></a-sky>
+		</a-scene>
+	</body>
+</html>
+-->
