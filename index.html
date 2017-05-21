@@ -20,7 +20,6 @@
 	      	</a-mixin>
         <audio id="song" autoplay loop src="soundcloud/KPJ3.wav"></audio>
       </a-assets>
-	<a-entity camera look-controls>
       		<a-entity
         audioanalyser="src: #song; smoothingTimeConstant: 5; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
@@ -29,7 +28,7 @@
 	entity-generator="mixin: red dancer; num: 256"
         rotation="0 90 0">
 		</a-entity>
-	</a-entity>
+	
       <a-light type="ambient" color="#222"></a-light>
       <a-light type="point" position="0 1 0" intensity="2"></a-light>
       <a-sky color="#222"></a-sky>
