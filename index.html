@@ -23,7 +23,7 @@
 
       <a-entity
 	entity-generator="mixin: random-1 red dancer; num: 256"
-        audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+        audioanalyser="src: #song; smoothingTimeConstant: 0.3; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 360"
 	color-on-beat="src: #song"
