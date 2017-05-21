@@ -18,6 +18,74 @@
 !function(e){function t(n){if(a[n])return a[n].exports;var i=a[n]={exports:{},id:n,loaded:!1};return e[n].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var a={};return t.m=e,t.c=a,t.p="",t(0)}([function(e,t){if("undefined"==typeof AFRAME)throw new Error("Component attempted to register before AFRAME was available.");var a;AFRAME.registerSystem("audioanalyser",{init:function(){this.analysers={}},getOrCreateAnalyser:function(e){a||(a=new AudioContext);var t=this.analysers,n=a.createAnalyser(),i=e.src,s=i.getAttribute("src");if(t[s])return t[s];var l=a.createMediaElementSource(i);return l.connect(n),n.connect(a.destination),n.smoothingTimeConstant=e.smoothingTimeConstant,n.fftSize=e.fftSize,t[s]=n,t[s]}}),AFRAME.registerComponent("audioanalyser",{schema:{enableBeatDetection:{default:!0},enableLevels:{default:!0},enableWaveform:{default:!0},enableVolume:{default:!0},fftSize:{default:2048},smoothingTimeConstant:{default:.8},src:{type:"selector"},unique:{default:!1}},init:function(){this.analyser=null,this.levels=null,this.waveform=null,this.volume=0},update:function(){function e(e){a.analyser=e,a.levels=new Uint8Array(a.analyser.frequencyBinCount),a.waveform=new Uint8Array(a.analyser.fftSize),a.el.emit("audioanalyser-ready",{analyser:e})}var t=this.data,a=this,n=this.system;t.src&&e(t.unique?n.createAnalyser(t):n.getOrCreateAnalyser(t))},tick:function(){var e=this.data;if(this.analyser){if((e.enableLevels||e.enableVolume)&&this.analyser.getByteFrequencyData(this.levels),e.enableWaveform&&this.analyser.getByteTimeDomainData(this.waveform),e.enableVolume||e.enableBeatDetection){for(var t=0,a=0;a<this.levels.length;a++)t+=this.levels[a];this.volume=t/this.levels.length}if(e.enableBeatDetection){var n=.99,i=60,s=.15;volume=this.volume,this.beatCutOff||(this.beatCutOff=volume),volume>this.beatCutOff&&volume>s?(console.log("[audioanalyser] Beat detected."),this.el.emit("audioanalyser-beat"),this.beatCutOff=1.5*volume,this.beatTime=0):this.beatTime<=i?this.beatTime++:(this.beatCutOff*=n,this.beatCutOff=Math.max(this.beatCutOff,s))}}}})}]);
 
 /*
+*   Levels Scale
+*/
+
+AFRAME.registerComponent('audioanalyser-levels-scale', {
+  schema: {
+    analyserEl: {type: 'selector'},
+    max: {default: 20},
+    multiplier: {default: 100}
+  },
+
+  tick: function (time) {
+    var analyserEl;
+    var children;
+    var data = this.data;
+    var levels;
+
+    analyserEl = data.analyserEl || this.el;
+    levels = analyserEl.components.audioanalyser.levels;
+    if (!levels) { return; }
+
+    children = this.el.children;
+    for (var i = 0; i < children.length; i++) {
+      children[i].setAttribute('scale', {
+        x: 1,
+        y: Math.min(data.max, Math.max(levels[i] * data.multiplier, 0.05)),
+        z: 1
+      });
+    }
+  }
+});
+
+/*
+*   Scale-y Color
+*/
+
+AFRAME.registerComponent('scale-y-color', {
+  schema: {
+    from: {type: 'vec3', default: {x: 0, y: 0, z: 0}},
+    to: {type: 'vec3', default: {x: 255, y: 255, z: 255}},
+    maxScale: {default: 20}
+  },
+
+  tick: function (time) {
+    var data = this.data;
+    var el = this.el;
+
+    if (time - this.time < 50) { return; }
+    this.time = time;
+
+    var scaleY = el.getAttribute('scale').y;
+    var percentage = scaleY / data.maxScale;
+    el.setAttribute('material', 'color', '#' + rgbToHex(
+      (data.to.x - data.from.x) * percentage,
+      (data.to.y - data.from.y) * percentage,
+      (data.to.z - data.from.z) * percentage
+    ));
+  }
+});
+
+function rgbToHex (r, g, b) {
+  var bin = r << 16 | g << 8 | b;
+  return (function (h) {
+    return new Array(7 - h.length).join('0') + h
+  })(bin.toString(16).toUpperCase());
+}
+
+
+/*
 *   Color on Beat
 */
 
@@ -49,6 +117,10 @@ AFRAME.registerComponent('color-on-beat', {
 */
 
 !function(e){function t(r){if(n[r])return n[r].exports;var i=n[r]={exports:{},id:r,loaded:!1};return e[r].call(i.exports,i,i.exports,t),i.loaded=!0,i.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t){if("undefined"==typeof AFRAME)throw new Error("Component attempted to register before AFRAME was available.");AFRAME.registerComponent("entity-generator",{schema:{mixin:{"default":""},num:{"default":10}},init:function(){for(var e=this.data,t=0;t<e.num;t++){var n=document.createElement("a-entity");n.setAttribute("mixin",e.mixin),this.el.appendChild(n)}}})}]);
+
+/*
+*   A lot of JS
+*/
 
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.AFRAME = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 "use strict";module.exports={createLink:function(e,t){var a=document.head||document.getElementsByTagName("head")[0],n=document.createElement("link");n.href=e,n.rel="stylesheet";for(var d in t)if(t.hasOwnProperty(d)){var r=t[d];n.setAttribute("data-"+d,r)}a.appendChild(n)},createStyle:function(e,t){var a=document.head||document.getElementsByTagName("head")[0],n=document.createElement("style");n.type="text/css";for(var d in t)if(t.hasOwnProperty(d)){var r=t[d];n.setAttribute("data-"+d,r)}n.sheet?(n.innerHTML=e,n.sheet.cssText=e,a.appendChild(n)):n.styleSheet?(a.appendChild(n),n.styleSheet.cssText=e):(n.appendChild(document.createTextNode(e)),a.appendChild(n))}};
