@@ -21,12 +21,11 @@
 
       <a-entity
         audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+        entity-generator="mixin: random-1 red dancer; num: 256"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 100"
-	layout="type: sphere; radius: 10"
 	color-on-beat="src: #song"
 	ring-on-beat="src: #song"
-        entity-generator="mixin: random-1 red dancer; num: 256"
         rotation="0 180 0"
       ></a-entity>
 
