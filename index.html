@@ -22,12 +22,12 @@
       </a-assets>
 
       <a-entity
-	entity-generator="mixin: random-1 red dancer; num: 256"
-        audioanalyser="src: #song; smoothingTimeConstant: 0.3; enableBeatDetection: true"
+	entity-generator="mixin: red dancer; num: 256"
+        audioanalyser="id: analyser; src: #song; smoothingTimeConstant: 0.3; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 360"
-	color-on-beat="src: #song"
-	ring-on-beat="src: #song"
+	color-on-beat="src: #analyser"
+	ring-on-beat="src: #analyser"
         rotation="0 0 0">
 	<a-animation attribute="rotation" repeat="indefinite" easing="linear"
                      dur="128000" to="0 360 0"></a-animation>
