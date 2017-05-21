@@ -66,20 +66,11 @@
                 scale="0.5 0.5 0.5">
       </a-entity>
 
-      <a-entity audioanalyser="src: #song; smoothingTimeConstant: 0.9"
-                audioanalyser-levels-scale="max: 50; multiplier: 0.06"
+      <a-entity audioanalyser-levels-scale="analyserEl: #analyser; max: 50; multiplier: 0.06"
                 entity-generator="mixin: random-1 red dancer; num: 350" 
                 layout="type: circle; radius: 10"
                 rotation="0 180 0">
       </a-entity>
-	  
-	  <a-entity
-        audioanalyser="src: #song; smoothingTimeConstant: 0.9"
-        audioanalyser-levels-scale="max: 50; multiplier: 0.06"
-        entity-generator="mixin: bar; num: 256"
-        layout="type: circle; radius: 10"
-        rotation="0 180 0"
-      ></a-entity>
       <a-light type="point" intensity="0.5"></a-light>
 
       <a-sky color="#000"></a-sky>
