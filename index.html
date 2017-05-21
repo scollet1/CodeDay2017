@@ -54,7 +54,10 @@
       <a-sky color="#111"></a-sky>
     
       <a-entity id="analyser"
-                audioanalyser
+                audioanalyser="src: #song"
+                audioanalyser-waveform="radius: 0.5"
+                rotation="90 0 0"
+                position="0 30 0"
       ></a-entity>
     
       <a-entity id="origin" 
