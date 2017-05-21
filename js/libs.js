@@ -1,7 +1,12 @@
 
-require('aframe-entity-generator-component');
-require('aframe-layout-component');
-require('aframe-template-component');
+/* 
+* Components in this library:
+* 	- color-on-beat
+* 	- audio-analyser
+* 	- random-color
+*	- random-position
+*	- 
+*/
 
 /* Randomizer Components */
 
