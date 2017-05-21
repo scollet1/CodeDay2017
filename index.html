@@ -21,12 +21,13 @@
       </a-assets>
 
       <a-entity
-	entity-generator="mixin: red dancer; num: 256"
         audioanalyser="id: analyser; src: #song; smoothingTimeConstant: 0.3; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 360"
+	layout="type: circle; radius: 10"
 	color-on-beat="src: #analyser"
 	ring-on-beat="src: #analyser"
+	entity-generator="mixin: red dancer; num: 256"
         rotation="0 0 0">
 	<a-animation attribute="rotation" repeat="indefinite" easing="linear"
                      dur="128000" to="0 360 0"></a-animation>
