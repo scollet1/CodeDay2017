@@ -31,7 +31,9 @@
         </a-mixin>
       
         <audio id="song" 
-               autoplay loop src="Kygo - Piano Jam 3 (Da Rabbit Remix Preview)_230523591_soundcloud.mp3">
+               autoplay 
+               loop 
+               src="https://soundcloud.com/new-retro-wave-pt-2/trevor-something-something">
         </audio>
     </a-assets>
     
@@ -51,12 +53,12 @@
      
       <a-sky color="#111"></a-sky>
     
-      <a-entity id="analyser"
+      <!--<a-entity id="analyser"
                 audioanalyser="src: #song"
                 audioanalyser-waveform="radius: 0.5"
                 rotation="90 0 0"
                 position="0 30 0"
-      ></a-entity>
+      ></a-entity> -->
     
       <a-entity id="origin" 
                 geometry="primitive: sphere" 
@@ -129,10 +131,10 @@
 <!--
 <html>
 	<head>
-    		<meta name="apple-mobile-web-app-capable"/>  I-frame support
+    		<meta name="apple-mobile-web-app-capable"/> <!-- I-frame support
 		    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
         <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script> <!-- Custom animation library
-    		<script src="entities.js"></script>  Our component library
+    		<script src="entities.js"></script> <!-- Our component library
 	</head>
 	<body>
 		<a-scene>
