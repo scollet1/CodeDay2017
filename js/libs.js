@@ -392,7 +392,6 @@ AFRAME.registerComponent('entity-generator', {
   }
 });
 
-},{}],4:[function(require,module,exports){
 /**
  * Layout component for A-Frame.
  * Some layouts adapted from http://www.vb-helper.com/tutorial_platonic_solids.html
