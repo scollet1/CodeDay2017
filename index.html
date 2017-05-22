@@ -25,12 +25,12 @@
 	      	</a-mixin>
         <audio id="song" autoplay loop src="media/Look Back In.mp3"></audio>
       </a-assets>
-	    <a-camera position="0 1 0" rotation="0 270 0" wasd-controls-enabled="true" wasd-controls="accelaration: 150"></a-camera> <!-- Setting user controls -->
+	    <a-camera position="100 1 0" rotation="0 270 0" wasd-controls-enabled="true" wasd-controls="accelaration: 150"></a-camera> <!-- Setting user controls -->
       		<a-entity
         audioanalyser="src: #song; smoothingTimeConstant: 0.9; enableBeatDetection: true"
         audioanalyser-levels-scale="max: 50; multiplier: 0.06"
 	audioanalyser-waveform="radius: 10"
-	layout="type: circle; radius: 10"
+	layout="type: line; radius: 15"
 	entity-generator="mixin: red dancer; num: 256"
         rotation="90 0 0">
 		</a-entity>
